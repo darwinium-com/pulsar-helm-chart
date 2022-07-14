@@ -124,25 +124,31 @@ auth:
 ## Control what images to use for each component
 images:
   zookeeper:
-    repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    # repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    repository: apachepulsar/pulsar-all
     tag: 2.10.1
     pullPolicy: IfNotPresent
   bookie:
-    repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    # repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    repository: apachepulsar/pulsar-all
     tag: 2.10.1
     pullPolicy: IfNotPresent
   autorecovery:
-    repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    # repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    repository: apachepulsar/pulsar-all
     tag: 2.10.1
     pullPolicy: IfNotPresent
-  broker:
-    repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+  broker:    # repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    repository: apachepulsar/pulsar-all
     tag: 2.10.1
     pullPolicy: IfNotPresent
   proxy:
-    repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    # repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    repository: apachepulsar/pulsar-all
     tag: 2.10.1
     pullPolicy: IfNotPresent
   functions:
-    repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    # repository: darwinium.jfrog.io/dwn-docker/pulsar-all
+    repository: apachepulsar/pulsar-all
     tag: 2.10.1
+    pullPolicy: IfNotPresent
