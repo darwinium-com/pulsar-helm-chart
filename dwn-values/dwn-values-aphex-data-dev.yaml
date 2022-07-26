@@ -24,6 +24,11 @@ monitoring:
   loki: false
   datadog: false
 
+pulsar_manager:
+  service:
+    type: "ClusterIP"
+
+
 zookeeper:
   replicaCount: 3
 
@@ -74,6 +79,8 @@ broker:
     subscriptionExpirationTimeMinutes: "4320"
     superUserRoles: "dwn-mothership-admin,dwn-tenant-admin"
 proxy:
+  service:
+    type: "ClusterIP"
   replicaCount: 2
   configData:
     PULSAR_MEM: >
