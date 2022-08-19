@@ -6,7 +6,7 @@ components:
   functions: true
   proxy: true
   toolset: true
-  pulsar_manager: true
+  pulsar_manager: false
   sql_worker: false
   kop: false
   mop: false
