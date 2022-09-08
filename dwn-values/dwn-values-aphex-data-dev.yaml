@@ -46,7 +46,7 @@ bookkeeper:
 broker:
   resources:
     limits:
-      cpu: 0.3
+      cpu: 1
   replicaCount: 3
   configData:
     PULSAR_MEM: >
