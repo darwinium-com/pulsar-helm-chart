@@ -39,8 +39,14 @@ bookkeeper:
     PULSAR_MEM: >
       -Xms128m -Xmx2048m -XX:MaxDirectMemorySize=512m
     numAddWorkerThreads: "2"
+  resources:
+    limits:
+      cpu: 0.25
 
 broker:
+  resources:
+    limits:
+      cpu: 0.3
   replicaCount: 3
   configData:
     PULSAR_MEM: >
@@ -79,6 +85,9 @@ broker:
     subscriptionExpirationTimeMinutes: "4320"
     superUserRoles: "dwn-mothership-admin,dwn-tenant-admin"
 proxy:
+  resources:
+    limits:
+      cpu: 0.250
   service:
     type: "ClusterIP"
   replicaCount: 2
