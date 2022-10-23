@@ -56,7 +56,57 @@ spec:
       tolerations:
 {{ toYaml .Values.zookeeper.tolerations | indent 8 }}
     {{- end }}
+      {{- if .Values.zookeeper.affinity.enableProdMode }}
       affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: eks.amazonaws.com/nodegroup
+                operator: In
+                values:
+                - pulsar-bc
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                      - "{{ template "pulsar.name" . }}"
+                    - key: "release"
+                      operator: In
+                      values:
+                      - {{ .Release.Name }}
+                    - key: "component" 
+                      operator: In
+                      values:
+                      - {{ .Values.zookeeper.component }}
+                topologyKey: "kubernetes.io/hostname"
+            - weight: 5
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: "app"
+                      operator: In
+                      values:
+                      - "{{ template "pulsar.name" . }}"
+                    - key: "release"
+                      operator: In
+                      values:
+                      - {{ .Release.Name }}
+                    - key: "component" 
+                      operator: In
+                      values:
+                      - {{ .Values.zookeeper.component }}
+                topologyKey: "kubernetes.io/zone"
+        {{- end }}
+ 
+      {{- else }}
+      affinity:   
         {{- if and .Values.affinity.anti_affinity .Values.zookeeper.affinity.anti_affinity}}
         podAntiAffinity:
           {{ if eq .Values.zookeeper.affinity.type "requiredDuringSchedulingIgnoredDuringExecution"}}
@@ -96,6 +146,7 @@ spec:
                       - {{ .Values.zookeeper.component }}
                 topologyKey: "kubernetes.io/hostname"
         {{ end }}
+        {{- end }}
         {{- end }}
       terminationGracePeriodSeconds: {{ .Values.zookeeper.gracePeriod }}
     {{- if and .Values.rbac.enabled .Values.rbac.psp }}
