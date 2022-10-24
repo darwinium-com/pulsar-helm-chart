@@ -107,7 +107,6 @@ spec:
                       values:
                       - {{ .Values.broker.component }}
                 topologyKey: "kubernetes.io/zone"
-        {{- end }}
  
       {{- else }}
       affinity:
