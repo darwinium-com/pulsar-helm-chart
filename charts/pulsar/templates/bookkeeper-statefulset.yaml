@@ -59,7 +59,7 @@ spec:
       tolerations:
 {{ toYaml .Values.bookkeeper.tolerations | indent 8 }}
     {{- end }}
-      {{- if .Values.zookeeper.affinity.enableProdMode }}
+      {{- if .Values.bookkeeper.affinity.enableProdMode }}
       affinity:
         topologySpreadConstraints:
         - maxSkew: 2
