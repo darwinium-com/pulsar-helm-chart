@@ -34,6 +34,10 @@ spec:
 {{- end }}
   template:
     spec:
+    {{- if .Values.bookkeeper.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.bookkeeper.nodeSelector | indent 8 }}
+    {{- end }}
     {{- if and .Values.rbac.enabled .Values.rbac.psp }}
       serviceAccountName: "{{ template "pulsar.fullname" . }}-{{ .Values.bookkeeper.component }}"
     {{- end }}
