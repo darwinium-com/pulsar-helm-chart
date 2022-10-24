@@ -54,6 +54,7 @@ zookeeper:
     anti_affinity: true
     # this is affection hosts only
     type: requiredDuringSchedulingIgnoredDuringExecution
+    enableProdMode: true
 bookkeeper:
   #3 replicas is required by default settings, ajdust in the Helm chart if undesirable
   replicaCount: 6
