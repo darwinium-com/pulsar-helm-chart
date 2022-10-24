@@ -31,7 +31,7 @@ monitoring:
   datadog: false
 
 zookeeper:
-  replicaCount: 3
+  replicaCount: 5
   resources:
     requests:
       memory: 300Mi
@@ -50,14 +50,31 @@ zookeeper:
       size: 12Gi
   nodeSelector:
     dwnapp: pulsar
-
+  affinity:
+    anti_affinity: true
+    # this is affection hosts only
+    type: requiredDuringSchedulingIgnoredDuringExecution
 bookkeeper:
   #3 replicas is required by default settings, ajdust in the Helm chart if undesirable
-  replicaCount: 3
+  replicaCount: 6
+  resources:
+    requests:
+      memory: 400Mi
+      cpu: 0.3
   configData:
     PULSAR_MEM: >
       -Xms128m -Xmx2048m -XX:MaxDirectMemorySize=512m
     numAddWorkerThreads: "2"
+  nodeSelector:
+    dwnapp: pulsar
+  affinity:
+    anti_affinity: true
+    # this is affection hosts only
+    type: requiredDuringSchedulingIgnoredDuringExecution
+    # possible values are "topology.kubernetes.io/zone" or "kubernetes.io/hostname"
+    enableProdMode: true
+
+    
 
 broker:
   replicaCount: 3
