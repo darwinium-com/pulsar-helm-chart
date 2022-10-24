@@ -28,7 +28,7 @@ toolset:
   resources:
     requests:
       memory: 100Mi
-      cpu: 0.1
+      cpu: 20m
 monitoring:
   prometheus: false
   grafana: false
@@ -68,7 +68,7 @@ bookkeeper:
   resources:
     requests:
       memory: 400Mi
-      cpu: 0.3
+      cpu: 150m
   volumes:
     journal:
       size: 5Gi
@@ -92,7 +92,7 @@ broker:
   resources:
     requests:
       memory: 1Gi
-      cpu: 750m
+      cpu: 300m
   nodeSelector:
     dwnapp: pulsar
   affinity:
@@ -141,7 +141,7 @@ proxy:
   resources:
     requests:
       memory: 600Mi
-      cpu: 300m
+      cpu: 200m
   nodeSelector:
     dwnapp: pulsar
   affinity:
