@@ -61,15 +61,15 @@ spec:
     {{- end }}
       {{- if .Values.proxy.affinity.enableProdMode }}
       affinity:
-       nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 1
-          preference:
-            matchExpressions:
-            - key: eks.amazonaws.com/nodegroup
-              operator: In
-              values:
-              - pulsar-a
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: eks.amazonaws.com/nodegroup
+                operator: In
+                values:
+                - pulsar-a
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: 100
