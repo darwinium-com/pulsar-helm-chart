@@ -60,7 +60,7 @@ spec:
       tolerations:
 {{ toYaml .Values.broker.tolerations | indent 8 }}
     {{- end }}
-      {{- if .Values.zookeeper.affinity.enableProdMode }}
+      {{- if .Values.broker.affinity.enableProdMode }}
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
