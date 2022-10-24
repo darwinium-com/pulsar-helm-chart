@@ -74,10 +74,20 @@ bookkeeper:
     # possible values are "topology.kubernetes.io/zone" or "kubernetes.io/hostname"
     enableProdMode: true
 
-    
-
 broker:
-  replicaCount: 3
+  replicaCount: 5
+  resources:
+    requests:
+      memory: 1Gi
+      cpu: 750m
+  nodeSelector:
+    dwnapp: pulsar
+  affinity:
+    anti_affinity: true
+    # this is affection hosts only
+    type: requiredDuringSchedulingIgnoredDuringExecution
+    # possible values are "topology.kubernetes.io/zone" or "kubernetes.io/hostname"
+    enableProdMode: true
   configData:
     PULSAR_MEM: >
       -Xms512m -Xmx4096m -XX:MaxDirectMemorySize=1024m
@@ -115,6 +125,19 @@ broker:
     subscriptionExpirationTimeMinutes: "4320"
     superUserRoles: "dwn-mothership-admin,dwn-tenant-admin"
 proxy:
+  resources:
+    requests:
+      memory: 600Mi
+      cpu: 300m
+  nodeSelector:
+    dwnapp: pulsar
+  affinity:
+    anti_affinity: true
+    # this is affection hosts only
+    type: requiredDuringSchedulingIgnoredDuringExecution
+    # possible values are "topology.kubernetes.io/zone" or "kubernetes.io/hostname"
+    enableProdMode: true
+
   service:
     type: "ClusterIP"
   replicaCount: 2
