@@ -103,8 +103,6 @@ spec:
                       values:
                       - {{ .Values.zookeeper.component }}
                 topologyKey: "kubernetes.io/zone"
-        {{- end }}
- 
       {{- else }}
       affinity:   
         {{- if and .Values.affinity.anti_affinity .Values.zookeeper.affinity.anti_affinity}}
