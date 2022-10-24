@@ -59,6 +59,27 @@ spec:
       tolerations:
 {{ toYaml .Values.bookkeeper.tolerations | indent 8 }}
     {{- end }}
+      {{- if .Values.zookeeper.affinity.enableProdMode }}
+      affinity:
+        topologySpreadConstraints:
+        - maxSkew: 2
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchExpressions:
+            - key: "app"
+              operator: In
+              values:
+              - "{{ template "pulsar.name" . }}"
+            - key: "release"
+              operator: In
+              values:
+              - {{ .Release.Name }}
+            - key: "component"
+              operator: In
+              values:
+              - {{ .Values.bookkeeper.component }}
+      {{- else }}
       affinity:
         {{- if and .Values.affinity.anti_affinity .Values.bookkeeper.affinity.anti_affinity}}
         podAntiAffinity:
@@ -99,6 +120,7 @@ spec:
                       - {{ .Values.bookkeeper.component }}
                 topologyKey: "kubernetes.io/hostname"
         {{ end }}
+        {{- end }}
         {{- end }}
       terminationGracePeriodSeconds: {{ .Values.bookkeeper.gracePeriod }}
     {{- if and .Values.rbac.enabled .Values.rbac.psp }}
