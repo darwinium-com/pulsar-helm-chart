@@ -4,7 +4,7 @@ affinity:
 components:
   zookeeper: true
   bookkeeper: true
-  autorecovery: true
+  autorecovery: false
   broker: true
   functions: true
   proxy: true
@@ -22,6 +22,13 @@ imagePullSecrets:
 - name: jfrog
 - name: oemreg
 
+toolset:
+  nodeSelector:
+    dwnapp: pulsar
+  resources:
+    requests:
+      memory: 100Mi
+      cpu: 0.1
 monitoring:
   prometheus: false
   grafana: false
