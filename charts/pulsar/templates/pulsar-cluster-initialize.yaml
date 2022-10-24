@@ -35,6 +35,10 @@ spec:
 {{- end }}
   template:
     spec:
+    {{- if .Values.bookkeeper.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.bookkeeper.nodeSelector | indent 8 }}
+    {{- end }}
       initContainers:
       {{- if .Values.pulsar_metadata.configurationStore }}
       - name: wait-cs-ready
