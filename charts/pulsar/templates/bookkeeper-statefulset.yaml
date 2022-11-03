@@ -51,6 +51,9 @@ spec:
 {{ toYaml . | indent 8 }}
 {{- end }}
     spec:
+    # {{- if .Values.activatePodPriority }}
+    #   priorityClassName: pulsar-critical
+    # {{- end }}
     {{- if .Values.bookkeeper.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.bookkeeper.nodeSelector | indent 8 }}

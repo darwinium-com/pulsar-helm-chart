@@ -67,10 +67,11 @@ spec:
           - weight: 1
             preference:
               matchExpressions:
-              - key: eks.amazonaws.com/nodegroup
+              # - key: eks.amazonaws.com/nodegroup
+              - key: appgroup
                 operator: In
                 values:
-                - pulsar-bc
+                - pulsar-a
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: 100
@@ -107,7 +108,6 @@ spec:
                       values:
                       - {{ .Values.broker.component }}
                 topologyKey: "kubernetes.io/zone"
- 
       {{- else }}
       affinity:
         {{- if and .Values.affinity.anti_affinity .Values.broker.affinity.anti_affinity}}
