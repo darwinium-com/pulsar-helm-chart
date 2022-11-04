@@ -63,6 +63,7 @@ spec:
 {{ toYaml .Values.bookkeeper.tolerations | indent 8 }}
     {{- end }}
       {{- if .Values.bookkeeper.affinity.enableProdMode }}
+      affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: 100
