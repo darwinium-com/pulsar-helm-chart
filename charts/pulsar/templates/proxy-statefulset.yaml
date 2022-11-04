@@ -106,7 +106,7 @@ spec:
                       operator: In
                       values:
                       - {{ .Values.proxy.component }}
-                topologyKey: "kubernetes.io/zone"
+                topologyKey: "kubernetes.io/hostname"
       {{- else }}
       affinity:
         {{- if and .Values.affinity.anti_affinity .Values.proxy.affinity.anti_affinity}}
