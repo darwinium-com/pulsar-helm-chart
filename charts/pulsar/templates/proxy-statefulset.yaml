@@ -67,7 +67,7 @@ spec:
             preference:
               matchExpressions:
               # - key: eks.amazonaws.com/nodegroup
-              key: appgroup
+              - key: appgroup
                 operator: In
                 values:
                 - pulsar-a
