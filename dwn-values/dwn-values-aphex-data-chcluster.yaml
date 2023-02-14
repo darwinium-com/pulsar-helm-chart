@@ -1,3 +1,4 @@
+clusterName: pulsar
 components:
   zookeeper: true
   bookkeeper: true
