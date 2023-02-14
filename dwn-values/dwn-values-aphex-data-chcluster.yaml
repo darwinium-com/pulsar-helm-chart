@@ -2,7 +2,7 @@ clusterName: pulsar
 components:
   zookeeper: true
   bookkeeper: true
-  autorecovery: true
+  autorecovery: false
   broker: true
   functions: true
   proxy: true
